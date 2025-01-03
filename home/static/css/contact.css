@@ -1,0 +1,143 @@
+/* Root Variables */
+:root {
+    --navy-blue: #1a2b4d; /* Primary navy color */
+    --navy-light: #2c4270; /* Lighter navy shade */
+    --navy-dark: #0f1a2e; /* Dark navy for accents */
+    --accent: #4a90e2; /* Vibrant accent color */
+    --white: #ffffff; /* White for text and backgrounds */
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, var(--navy-blue), var(--accent));
+    color: var(--white);
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    line-height: 1.5;
+    animation: fadeIn 0.8s ease;
+}
+
+.hero-content h1:nth-child(2) {
+    margin-top: 1rem;
+    font-size: 2rem;
+    animation: fadeIn 0.8s ease 0.3s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Inquiry Form */
+.inquire-form-section {
+    padding: 4rem 2rem;
+    background: var(--white);
+    color: var(--white);
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    color: var(--navy-dark);
+}
+
+form input[type="text"],
+form input[type="email"],
+form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--navy-blue);
+    border-radius: 5px;
+    background: var(--white);
+    font-size: 1rem;
+    color: var(--navy-dark);
+    transition: border-color 0.3s ease;
+}
+
+form input:focus,
+form textarea:focus {
+    border-color: var(--accent);
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.submit-btn {
+    width: 100%;
+    background: var(--accent);
+    color: var(--white);
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.submit-btn:hover {
+    background: var(--navy-blue);
+    transform: translateY(-2px);
+}
+
+/* Success Message */
+.alert {
+    max-width: 600px;
+    margin: 1rem auto;
+    padding: 1rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: var(--white);
+    text-align: center;
+}
+
+.alert-success {
+    background: var(--accent);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    form {
+        padding: 1.5rem;
+    }
+
+    form input,
+    form textarea {
+        font-size: 0.9rem;
+    }
+
+    .submit-btn {
+        font-size: 0.95rem;
+    }
+}

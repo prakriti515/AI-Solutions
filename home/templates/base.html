@@ -1,0 +1,110 @@
+<!-- base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AI Solutions{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="dark-theme">
+    <div class="scroll-progress"></div>
+
+    <!-- Navbar -->
+    <!-- Navbar -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            {% if site_settings and site_settings.logo %}
+                <img src="{{ site_settings.logo.url }}" alt="AI Solutions Logo" class="site-logo">
+            {% else %}
+                <span>AI Solutions</span>
+            {% endif %}
+        </div>
+        <div class="nav-center">
+            <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
+            <a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a>
+            <a href="{% url 'service_list' %}" class="{% if request.resolver_match.url_name == 'service_list' %}active{% endif %}">Services</a>
+            <a href="{% url 'event_list' %}" class="{% if request.resolver_match.url_name == 'event_list' %}active{% endif %}">Events</a>
+            <a href="{% url 'blog_list' %}" class="{% if request.resolver_match.url_name == 'blog_list' %}active{% endif %}">Blogs</a>
+            <a href="{% url 'gallery' %}" class="{% if request.resolver_match.url_name == 'gallery' %}active{% endif %}">Gallery</a>
+            
+        </div>
+        <div class="nav-right">
+            <a href="{% url 'contact_us' %}" class="contact-btn {% if request.resolver_match.url_name == 'contact_us' %}active{% endif %}">Contact Us</a>
+        </div>
+    </div>
+</nav>
+
+    <!-- Main Content -->
+    <main style="min-height: 70vh;">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                {% if site_settings and site_settings.logo %}
+                    <img src="{{ site_settings.logo.url }}" alt="Logo" class="footer-logo" style="max-width: 120px;">
+                {% endif %}
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'service_list' %}">Services</a></li>
+                    <li><a href="{% url 'event_list' %}">Events List</a></li>
+                    
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li>Phone: (+44) 456-7890-751</li>
+                    <li>Email: contact@aisolutions.com</li>
+                    <li>Address: Sunderland SR1 3EX, UK</li>
+                    <li>Open: Monday - Friday: 9 AM - 7 PM</li>
+
+                </ul>
+            </div>
+            <div class="footer-section">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4587.817421713149!2d-1.4009880064209066!3d54.90452450000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487e66861c050547%3A0xdd379a151a534780!2sUniversity%20of%20Sunderland%2C%20City%20Campus!5e0!3m2!1sen!2suk!4v1735622314262!5m2!1sen!2suk"
+                    width="100%" 
+                    height="200" 
+                    style="border:0; border-radius: 8px;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            &copy; 2024 AI Solutions. All rights reserved.
+        </div>
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBar = document.querySelector('.scroll-progress');
+            window.addEventListener('scroll', () => {
+                const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (window.scrollY / windowHeight) * 100;
+                progressBar.style.width = `${scrolled}%`;
+            });
+        });
+    </script>
+</body>
+</html>

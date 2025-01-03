@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Gallery - AI Solutions{% endblock %}
+{% block extra_css %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<style>
+    .gallery-container {
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .gallery-container h1 {
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+    }
+
+    /* Slideshow Styles */
+    .slideshow {
+        position: relative;
+        height: 500px;
+        margin-bottom: 30px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease;
+    }
+
+    .slide.active {
+        opacity: 1;
+    }
+
+    .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .slide-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+        color: white;
+    }
+
+    /* Navigation Arrows */
+    .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .arrow.left {
+        left: 10px;
+    }
+
+    .arrow.right {
+        right: 10px;
+    }
+
+    /* Dot Indicators */
+    .dots {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .dot.active {
+        background-color: white;
+    }
+
+    /* Grid Gallery Styles */
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+    }
+
+    .gallery-item {
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+        .slideshow {
+            height: 300px;
+        }
+
+        .gallery-item img {
+            height: 150px;
+        }
+    }
+</style>
+
+<div class="gallery-container">
+    <h1>Gallery</h1>
+
+    <!-- Slideshow Section -->
+    <div class="slideshow" id="slideshow">
+        {% for image in images %}
+        <div class="slide {% if forloop.first %}active{% endif %}">
+            <img src="{{ image.image.url }}" alt="{{ image.title }}">
+            <div class="slide-caption">
+                <h3>{{ image.title }}</h3>
+                {% if image.description %}
+                <p>{{ image.description }}</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Left and Right Arrows -->
+        <button class="arrow left" id="prevSlide"><i class="fas fa-chevron-left"></i></button>
+        <button class="arrow right" id="nextSlide"><i class="fas fa-chevron-right"></i></button>
+
+        <!-- Dot Indicators -->
+        <div class="dots" id="dots">
+            {% for image in images %}
+            <span class="dot {% if forloop.first %}active{% endif %}" data-index="{{ forloop.counter0 }}"></span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Grid Gallery Section -->
+    <div class="gallery-grid">
+        {% for image in images %}
+        <div class="gallery-item">
+            <img src="{{ image.image.url }}" alt="{{ image.title }}">
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const prevButton = document.getElementById('prevSlide');
+    const nextButton = document.getElementById('nextSlide');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            currentSlide = parseInt(dot.getAttribute('data-index'));
+            showSlide(currentSlide);
+        });
+    });
+
+    prevButton.addEventListener('click', prevSlide);
+    nextButton.addEventListener('click', nextSlide);
+
+    setInterval(nextSlide, 2000); // Auto advance slides every 2 seconds
+
+
+    
+</script>
+<!-- Kommunicate Chatbot Script -->
+<script type="text/javascript">
+    (function(d, m){
+        var kommunicateSettings = 
+            {"appId":"108a8234ae47abd44e85168f4d0ab1216","popupWidget":true,"automaticChatOpenOnNavigation":true};
+        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+        window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+</script>
+{% endblock %}

@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us - AI Solutions{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/about.css' %}">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<section class="about-hero">
+    <div class="about-hero-content">
+        <h1>Welcome to AI Solutions</h1>
+        <p>Empowering businesses and individuals with cutting-edge AI-driven tools and solutions.</p>
+    </div>
+</section>
+<section class="ceo-section">
+    <h2>About AI Solution</h2>
+    <div class="ceo-container">
+        <div class="ceo-text">
+            <blockquote>
+                <p>
+                    Founded over 5 years ago, AI-Solutions specializes in transforming digital workplaces through cutting-edge AI technologies. Our mission is to empower businesses with intelligent solutions that optimize productivity, spark innovation, and create lasting impact.
+                </p>
+                <!-- <footer>- John Doe, CEO of AI Solutions</footer> -->
+            </blockquote>
+        </div>
+        <!-- <div class="ceo-photo">
+            <img src="{% static 'images/Ceo.jpg' %}" alt="CEO John Doe">
+        </div> -->
+    </div>
+</section>
+
+<section class="company-description">
+    <h2>Mission And Vision</h2>
+    <p class="intro-text">
+        At <strong>AI Solutions</strong>, our mission is to revolutionize digital workplaces with cutting-edge AI-driven solutions that empower businesses to innovate, enhance productivity, and achieve sustainable growth. Our vision is to lead the global transformation of work, setting new benchmarks in AI-powered innovation and redefining the digital employee experience for a smarter, more connected future.
+    </p>
+    <div class="mission-vision-container">
+        <div class="mission-vision-card">
+            <h3>Our Mission</h3>
+            <p>
+                To revolutionize digital workplaces by delivering cutting-edge AI-driven solutions that empower businesses to innovate, optimize productivity, and achieve sustainable growth.
+            </p>
+        </div>
+        <div class="mission-vision-card">
+            <h3>Our Vision</h3>
+            <p>
+                To be a global leader in AI-powered innovation, shaping the future of work and redefining the digital employee experience for businesses worldwide.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="team-section">
+    <h2>Meet Our Team</h2>
+    <div class="team-grid">
+        <div class="team-member">
+            <img src="{% static 'images/member1.jpg' %}" alt="John Smith">
+            <h3>Astya Das</h3>
+            <p>Chief Executive Officer</p>
+        </div>
+        <div class="team-member">
+            <img src="{% static 'images/member2.jpg' %}" alt="Jane Doe">
+            <h3>Jane Doe</h3>
+            <p>AI Specialist</p>
+        </div>
+        <div class="team-member">
+            <img src="{% static 'images/member4.jpg' %}" alt="John Smith">
+            <h3>Harry Shah</h3>
+            <p>UI/UX Developer</p>
+        </div>
+        <div class="team-member">
+            <img src="{% static 'images/member6.jpg' %}" alt="Jane Doe">
+            <h3>Paris Shay</h3>
+            <p>Project Manager</p>
+        </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<section class="testimonials-section">
+    <h2>What Our Clients Say</h2>
+    <div class="testimonials-grid">
+        <div class="testimonial">
+            <p>
+                "Turbo Farm has completely transformed the way we approach
+                agriculture. With its AI-driven insights and automation, we’ve seen a
+                significant boost in crop yields while reducing resource usage. The
+                real-time monitoring system is a game-changer, allowing us to address
+                issues before they become problems. Not only has it made our operations
+                more efficient, but it’s also helped us embrace sustainable farming
+                practices. Turbo Farm is truly the future of agriculture!"
+            </p>
+            <footer>- David Wisseman, Warner Farm</footer>
+            <p>Ratings: ⭐ 4.8/5</p>
+        </div>
+        <div class="testimonial">
+            <p>
+                "Log AI has revolutionized our inventory management system. The
+                AI-driven optimization has helped us maintain perfect stock levels,
+                reducing both overstock and stockouts. The real-time tracking and
+                predictive analytics have made our supply chain more efficient, and we’re
+                now able to make data-driven decisions that save both time and money.
+                The seamless integration with our existing systems was a huge plus. Log
+                AI is a must-have for any business looking to streamline inventory
+                operations and stay ahead of the competition!" 
+            </p>
+            <footer>- Michael Reed, Vaux Brewery</footer>
+            <p>Ratings: ⭐ 4.2/5</p>
+        </div>
+        <div class="testimonial">
+            <p>
+                “Asaninvestor, Stockk has completely changed the way I approach
+                trading. The AI-powered insights and real-time market analysis have
+                given me a huge advantage in making informed decisions. The
+                automated trading feature has helped me execute trades at the right
+                moments, even when I’m not able to monitor the market. Whether you’re
+                a beginner or an experienced trader, Stockk simplifies the process while
+                maximizing potential returns. It's an essential tool in my investment
+                strategy!"
+            </p>
+            <footer>- Sarah Lampard, Independent Investor</footer>
+            <p>Ratings: ⭐ 4.9/5</p>
+        </div>
+        <div class="testimonial">
+            <p>
+                "LaundriQ is a groundbreaking innovation that perfectly complements
+                Samsung’s commitment to smart home solutions. As a regional manager,
+                I’ve seen firsthand how this AI-powered tool enhances the laundry
+                experience for our customers. By intelligently detecting fabric quality and
+                optimizing detergent usage, LaundriQ not only ensures superior cleaning
+                results but also supports eco-friendly practices. This collaboration with
+                LaundriQ aligns with our vision of creating smarter, more sustainable
+                home appliances. It’s truly a game-changer in the world of laundry care."
+            </p>
+            <footer>- Sarah Lampard, Independent Investor</footer>
+            <p>Ratings: ⭐ 4.7/5</p>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/about.js' %}"></script>
+<!-- Kommunicate Chatbot Script -->
+<script type="text/javascript">
+    (function(d, m){
+        var kommunicateSettings = 
+            {"appId":"108a8234ae47abd44e85168f4d0ab1216","popupWidget":true,"automaticChatOpenOnNavigation":true};
+        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+        window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+</script>
+{% endblock %}

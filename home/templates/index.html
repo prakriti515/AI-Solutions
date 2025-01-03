@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - AI Solutions{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+    <video autoplay loop muted playsinline class="hero-bg-video">
+        <source src="{% static 'videos/2.mp4' %}" type="video/mp4">
+    </video>
+    <div class="hero-content">
+        <!-- <span class="hero-tag">AI Technology</span> -->
+        <h1>Revolutionizing Workplaces: Leading the AI-Driven Future</h1>
+        <p>AI-Solutions is at the forefront of transforming workplaces with cutting-edge AI technologies. We empower businesses to innovate, optimize productivity, and shape a smarter, more connected future.</p>
+        <a href="{% url 'contact_us' %}" class="cta-btn">Get Started </a>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="services">
+    <h2>Our Services</h2>
+    <div class="services-grid">
+        {% for service in services %}
+        <div class="service-item">
+            <img src="{{ service.image.url }}" alt="{{ service.title }}">
+            <h3>{{ service.title }}</h3>
+            <p>{{ service.description|truncatewords:15 }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    <a href="{% url 'service_list' %}" class="cta-btn">Explore All Services</a>
+</section>
+
+<!-- Trusted By Section -->
+<section class="trusted-by">
+    <h2>Trusted By</h2>
+    <div class="trusted-logos">
+        <div class="logo-item"><img src="{% static 'images/amazon.png' %}" alt="Logo 1"></div>
+        <div class="logo-item"><img src="{% static 'images/apple.png' %}" alt="Logo 2"></div>
+        <div class="logo-item"><img src="{% static 'images/bmw.png' %}" alt="Logo 3"></div>
+        <div class="logo-item"><img src="{% static 'images/disney.png' %}" alt="Logo 4"></div>
+        <!-- <div class="logo-item"><img src="{% static 'images/espn.png' %}" alt="Logo 5"></div> -->
+        <!-- <div class="logo-item"><img src="{% static 'images/gucci.png' %}" alt="Logo 6"></div> -->
+        <!-- <div class="logo-item"><img src="{% static 'images/starbucks.png' %}" alt="Logo 7"></div> -->
+        <!-- <div class="logo-item"><img src="{% static 'images/sony.png' %}" alt="Logo 8"></div>
+        <div class="logo-item"><img src="{% static 'images/espn.png' %}" alt="Logo 5"></div> -->
+
+    </div>
+</section>
+
+
+<!-- Blog Section -->
+<section class="blogs">
+    <h2>Recent Blog Posts</h2>
+    <div class="blog-grid">
+        {% for blog in blogs %}
+        <div class="blog-item">
+            <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+            <h3>{{ blog.title }}</h3>
+            <p>{{ blog.content|truncatewords:15 }}</p>
+            <a href="{% url 'blog_detail' blog.id %}">Read More →</a>
+        </div>
+        {% endfor %}
+    </div>
+    <a href="{% url 'blog_list' %}" class="cta-btn">View All Blogs</a>
+</section>
+
+
+<section class="testimonials-section">
+  <h2>What Our Clients Say</h2>
+  <div class="testimonials-grid">
+      <div class="testimonial">
+          <p>
+              "Turbo Farm has completely transformed the way we approach
+              agriculture. With its AI-driven insights and automation, we’ve seen a
+              significant boost in crop yields while reducing resource usage. The
+              real-time monitoring system is a game-changer, allowing us to address
+              issues before they become problems. Not only has it made our operations
+              more efficient, but it’s also helped us embrace sustainable farming
+              practices. Turbo Farm is truly the future of agriculture!"
+          </p>
+          <footer>- David Wisseman, Warner Farm</footer>
+          <p>Ratings: ⭐ 4.8/5</p>
+      </div>
+      <div class="testimonial">
+          <p>
+              "Log AI has revolutionized our inventory management system. The
+              AI-driven optimization has helped us maintain perfect stock levels,
+              reducing both overstock and stockouts. The real-time tracking and
+              predictive analytics have made our supply chain more efficient, and we’re
+              now able to make data-driven decisions that save both time and money.
+              The seamless integration with our existing systems was a huge plus. Log
+              AI is a must-have for any business looking to streamline inventory
+              operations and stay ahead of the competition!" 
+          </p>
+          <footer>- Michael Reed, Vaux Brewery</footer>
+          <p>Ratings: ⭐ 4.2/5</p>
+      </div>
+      <div class="testimonial">
+          <p>
+              “Asaninvestor, Stockk has completely changed the way I approach
+              trading. The AI-powered insights and real-time market analysis have
+              given me a huge advantage in making informed decisions. The
+              automated trading feature has helped me execute trades at the right
+              moments, even when I’m not able to monitor the market. Whether you’re
+              a beginner or an experienced trader, Stockk simplifies the process while
+              maximizing potential returns. It's an essential tool in my investment
+              strategy!"
+          </p>
+          <footer>- Sarah Lampard, Independent Investor</footer>
+          <p>Ratings: ⭐ 4.9/5</p>
+      </div>
+      <!-- <div class="testimonial">
+          <p>
+              "LaundriQ is a groundbreaking innovation that perfectly complements
+              Samsung’s commitment to smart home solutions. As a regional manager,
+              I’ve seen firsthand how this AI-powered tool enhances the laundry
+              experience for our customers. By intelligently detecting fabric quality and
+              optimizing detergent usage, LaundriQ not only ensures superior cleaning
+              results but also supports eco-friendly practices. This collaboration with
+              LaundriQ aligns with our vision of creating smarter, more sustainable
+              home appliances. It’s truly a game-changer in the world of laundry care."
+          </p>
+          <footer>- Sarah Lampard, Independent Investor</footer>
+          <p>Ratings: ⭐ 4.7/5</p>
+      </div> -->
+  </div>
+</section>
+
+<!-- Event Timeline -->
+<section class="events">
+    <h2>Event Timeline</h2>
+    <ul class="event-list">
+        {% for event in events %}
+        <li>
+            <h3>{{ event.title }}</h3>
+            <p><strong>Date:</strong> {{ event.date }}</p>
+            <p>{{ event.description|truncatewords:20 }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'event_list' %}" class="cta-btn">View All Events</a>
+</section>
+<!-- Gallery Section -->
+<section class="gallery">
+    <h2 class="gallery-title" >Gallery</h2>
+    <div class="gallery-grid">
+        {% for image in images %}
+        <div class="gallery-item">
+            <img src="{{ image.image.url }}" alt="{{ image.title }}">
+        </div>
+        {% endfor %}
+    </div>
+    <a href="{% url 'gallery' %}" class="cta-btn">View Full Gallery</a>
+</section>
+
+
+
+<!-- Milestones Section -->
+<section class="facts">
+  <h2><span class="highlight">Milestones</span></h2>
+  <div class="facts-container">
+      <div class="fact-item"><i class="fas fa-calendar-alt fa-2x"></i><h3>5+</h3><p>Years of Excellence</p></div>
+      <div class="fact-item"><i class="fas fa-tasks fa-2x"></i><h3>150+</h3><p>Successful Deployments</p></div>
+      <div class="fact-item"><i class="fas fa-users fa-2x"></i><h3>50+</h3><p>Team Members</p></div>
+  </div>
+</section>
+
+{% endblock %}
+
+
+
+{% block extra_js %}
+<script src="{% static 'js/index.js' %}"></script>
+
+<!-- Kommunicate Chatbot Script -->
+<script type="text/javascript">
+    (function(d, m){
+        var kommunicateSettings = 
+            {"appId":"108a8234ae47abd44e85168f4d0ab1216","popupWidget":true,"automaticChatOpenOnNavigation":true};
+        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+        window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+</script>
+{% endblock %}
+

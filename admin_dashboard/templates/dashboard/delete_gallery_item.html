@@ -1,0 +1,13 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h2>Confirm Deletion</h2>
+    <p>Are you sure you want to delete "{{ image.title }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a href="{% url 'admin_gallery' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

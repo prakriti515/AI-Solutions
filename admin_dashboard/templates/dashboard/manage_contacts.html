@@ -1,0 +1,51 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h2>Manage Inquiries</h2>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>S.N.</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Company Name</th>
+                <th>Country</th>
+                <th>Job Title</th>
+                <th>Job Details</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contact in contacts %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ contact.name }}</td>
+                <td>{{ contact.email }}</td>
+                <td>{{ contact.phone|default:"N/A" }}</td>
+                <td>{{ contact.company_name }}</td>
+                <td>{{ contact.country }}</td>
+                <td>{{ contact.job_title }}</td>
+                <td>{{ contact.job_details|truncatewords:10 }}</td>
+                <td>
+                    <span class="badge {% if contact.status == 'Resolved' %}bg-success{% else %}bg-warning{% endif %}">
+                        {{ contact.status }}
+                    </span>
+                </td>
+                <td>
+                    <a href="{% url 'update_contact_status' contact.pk %}" class="btn btn-sm btn-primary">
+                        Mark as {% if contact.status == 'Resolved' %}Pending{% else %}Resolved{% endif %}
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="10" class="text-center">No inquiries found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

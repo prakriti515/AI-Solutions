@@ -1,0 +1,226 @@
+{% extends "base.html" %}
+
+{% block title %}Events - AI Solutions{% endblock %}
+{% block extra_css %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+<style>
+    .events-container {
+        padding: 4rem 0;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+        min-height: 100vh;
+    }
+
+    .events-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+        color: #2d3748;
+        margin-bottom: 3rem;
+        position: relative;
+        text-align: center;
+    }
+
+    .page-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 4px;
+        background: #4299e1;
+        border-radius: 2px;
+    }
+
+    .events-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .event-card {
+        background: #1a2b4d; /* Navy-blue background */
+        color: #ffffff; /* White text for contrast */
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .event-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2); /* Stronger hover shadow */
+    }
+
+    .event-image {
+        height: 250px;
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .event-content {
+        padding: 1.5rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .event-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #ffffff; /* White title text */
+        margin-bottom: 0.75rem;
+    }
+
+    .event-date {
+        color: #4a90e2; /* Accent blue for date */
+        font-size: 1rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #4a90e2; /* Accent border */
+    }
+
+    .event-date i {
+        margin-right: 0.5rem;
+    }
+
+    .event-description {
+        color: #dce1ea; /* Light gray text for description */
+        font-size: 1rem;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+        flex-grow: 1;
+    }
+
+    .event-location {
+        display: flex;
+        align-items: center;
+        color: #dce1ea; /* Light gray for location */
+        font-size: 0.95rem;
+        padding-top: 1rem;
+        border-top: 1px solid #4a90e2; /* Accent border */
+    }
+
+    .event-location i {
+        margin-right: 0.5rem;
+    }
+
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .events-wrapper {
+            padding: 0 1rem;
+        }
+
+        .events-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .page-title {
+            font-size: 2rem;
+        }
+
+        .event-image {
+            height: 200px;
+        }
+
+        .event-title {
+            font-size: 1.3rem;
+        }
+
+        .event-description {
+            font-size: 0.9rem;
+        }
+    }
+</style>
+
+
+<div class="events-container">
+    <div class="events-wrapper">
+        <h1 class="page-title">Upcoming Events</h1>
+        <div class="events-grid">
+            {% for event in events %}
+            <div class="event-card fade-in">
+                {% if event.image %}
+                <img src="{{ event.image.url }}" class="event-image" alt="{{ event.title }}">
+                {% endif %}
+                <div class="event-content">
+                    <h5 class="event-title">{{ event.title }}</h5>
+                    <div class="event-date">
+                        <i class="fas fa-calendar-alt"></i>
+                        {{ event.date }} at {{ event.time }}
+                    </div>
+                    <p class="event-description">{{ event.description }}</p>
+                    <div class="event-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        {{ event.location }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const cards = document.querySelectorAll('.event-card');
+
+    // Apply animation delay for staggered fade-in effect
+    cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.2}s`;
+    });
+
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in'); // Trigger fade-in animation
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.2, // Trigger when 20% of the card is visible
+    });
+
+    // Observe each event card
+    cards.forEach((card) => observer.observe(card));
+});
+</script>
+<!-- Kommunicate Chatbot Script -->
+<script type="text/javascript">
+    (function(d, m){
+        var kommunicateSettings = 
+            {"appId":"108a8234ae47abd44e85168f4d0ab1216","popupWidget":true,"automaticChatOpenOnNavigation":true};
+        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+        window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+</script>
+{% endblock %}

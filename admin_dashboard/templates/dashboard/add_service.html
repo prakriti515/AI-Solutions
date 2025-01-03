@@ -1,0 +1,18 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h2>
+        {% if service %}
+            {{ service.title }}
+        {% else %}
+            Add New Service
+        {% endif %}
+    </h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Save Service</button>
+    </form>
+</div>
+{% endblock %}

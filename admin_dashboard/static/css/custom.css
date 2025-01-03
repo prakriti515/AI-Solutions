@@ -1,0 +1,46 @@
+/* Sidebar styling */
+#sidebar-wrapper {
+    height: 100vh; /* Full height of the viewport */
+    width: 250px; /* Fixed width */
+    position: fixed; /* Stick to the left */
+    left: 0;
+    top: 0;
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    background-color: #13223f; /* Dark background */
+    color: white;
+    z-index: 1000;
+}
+
+/* Sidebar links */
+#sidebar-wrapper .list-group-item {
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+#sidebar-wrapper .list-group-item:hover {
+    background-color: #13223f;
+    color: #fff;
+}
+
+/* Content wrapper */
+#page-content-wrapper {
+    margin-left: 250px; /* Leave space for the sidebar */
+    width: calc(100% - 250px); /* Adjust width */
+    padding: 20px;
+}
+
+/* Adjust layout when sidebar is toggled */
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: -250px; /* Hide sidebar */
+}
+
+#wrapper.toggled #page-content-wrapper {
+    margin-left: 0;
+    width: 100%;
+}
+
+.site-logo, .admin-logo {
+    max-height: 50px;
+    width: auto;
+}

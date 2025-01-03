@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ blog.title }} - AI Solutions{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/blog_detail.css' %}">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<article class="blog-detail">
+    <div class="back-nav">
+        <a href="{% url 'blog_list' %}" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back to Blogs</span>
+        </a>
+    </div>
+    <header class="blog-header">
+        <h1 class="blog-title">{{ blog.title }}</h1>
+        <div class="blog-meta">
+            <div class="blog-meta-item">
+                <i class="far fa-user"></i>
+                <span>{{ blog.author }}</span>
+            </div>
+            <div class="blog-meta-item">
+                <i class="far fa-calendar"></i>
+                <span>{{ blog.created_at|date:"F d, Y" }}</span>
+            </div>
+        </div>
+    </header>
+
+    {% if blog.image %}
+    <div class="featured-image">
+        <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+    </div>
+    {% endif %}
+
+    <div class="blog-content">
+        {{ blog.content|linebreaks }}
+    </div>
+</article>
+
+<!-- Kommunicate Chatbot Script -->
+<script type="text/javascript">
+    (function(d, m){
+        var kommunicateSettings = 
+            {"appId":"108a8234ae47abd44e85168f4d0ab1216","popupWidget":true,"automaticChatOpenOnNavigation":true};
+        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+        window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+</script>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <!-- Use Django's conditional template tags -->
+    <h2>
+        {% if event %}
+            {{ event.title }}
+        {% else %}
+            Add New Event
+        {% endif %}
+    </h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Save Event</button>
+    </form>
+</div>
+{% endblock %}

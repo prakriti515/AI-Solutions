@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Sidebar */
+        #sidebar-wrapper {
+            background-color: #13223f; /* Dark sidebar background */
+            color: white;
+            min-height: 100vh;
+        }
+
+        #sidebar-wrapper .sidebar-heading {
+            font-size: 1.5rem;
+            text-align: center;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #sidebar-wrapper .list-group-item {
+            color: white;
+            background: none;
+            border: none;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        #sidebar-wrapper .list-group-item:hover {
+            background-color: #4a90e2; /* Hover effect */
+            color: white;
+        }
+
+        /* Content Section */
+        #page-content-wrapper {
+            background-color: white; /* White content area */
+            padding: 2rem;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: white;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .btn-dark {
+            background-color: #13223f; /* Sidebar toggle button */
+            color: white;
+            border: none;
+        }
+
+        .navbar .btn-dark:hover {
+            background-color: #4a90e2; /* Accent color on hover */
+        }
+
+        .navbar .btn-outline-danger {
+            background: #00509E;
+            color:  #FFFFFF;
+            padding: 0.6rem 1.6rem;
+            border-radius: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            border: 2px solid #00509E;
+            transition: all 0.3s;
+        }
+
+        .navbar .btn-outline-danger:hover {
+            background-color: #FFFFFF;
+            color:  #00509E;
+            border-color: #00509E;
+        }
+
+        /* Logo */
+        .admin-logo {
+            max-width: 150px;
+            margin: 0 auto 0.5rem;
+            display: block;
+            height: 80px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-heading">
+                {% if site_settings and site_settings.logo %}
+                    <img src="{{ site_settings.logo.url }}" alt="Admin Logo" class="admin-logo">
+                {% else %}
+                    <h4>AI Solutions</h4>
+                {% endif %}
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="{% url 'admin_dashboard' %}" class="list-group-item list-group-item-action">Dashboard</a>
+                
+                <a href="{% url 'admin_event' %}" class="list-group-item list-group-item-action">Event Timeline</a>
+                <a href="{% url 'admin_gallery' %}" class="list-group-item list-group-item-action">Photo Management</a>
+                <a href="{% url 'admin_blog' %}" class="list-group-item list-group-item-action">Blogs Management</a>
+                <a href="{% url 'manage_services' %}" class="list-group-item list-group-item-action">Service Portfolio Management</a>
+                <a href="{% url 'manage_contacts' %}" class="list-group-item list-group-item-action">Contact Management</a>
+                <a href="{% url 'manage_logo' %}" class="list-group-item list-group-item-action"> Logo Management</a>
+                <a href="{% url 'change_password' %}" class="list-group-item list-group-item-action">Change Password</a>
+                <a href="{% url 'logout' %}" class="list-group-item list-group-item-action">Logout</a>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper" class="w-100">
+            <!-- Navbar -->
+             
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <button class="btn btn-dark" id="menu-toggle">☰</button>
+                    <div class="d-flex align-items-center">
+                        <span class="me-3">Welcome, Admin</span>
+                        <a href="{% url 'logout' %}" class="btn btn-outline-danger">Logout</a>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Dynamic Content -->
+            <div class="container-fluid mt-4">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Toggle Sidebar
+        const toggleButton = document.getElementById('menu-toggle');
+        const wrapper = document.getElementById('wrapper');
+        toggleButton.addEventListener('click', () => {
+            wrapper.classList.toggle('toggled');
+        });
+    </script>
+</body>
+</html>
